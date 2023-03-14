@@ -1,0 +1,8 @@
+.hacker--text {
+  position: relative;
+  display: block;
+  color: white;
+  font-size: 5rem;
+  font-family: "Space Mono", monospace;
+  z-index: 20;
+}
