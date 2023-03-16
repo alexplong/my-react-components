@@ -1,78 +1,45 @@
 /** @format */
 
 import React from "react";
+import { useParticleCanvasContext } from "../hooks/useParticleCanvasContext";
 
 const ParticleCanvas = () => {
-  const canvas = React.useRef();
-  const ctx = React.useRef();
-  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
-  const [windowHeight, setWindowHeight] = React.useState(window.innerHeight);
+  const {
+    canvasRef,
+    ctx,
+    handleParticleBurst,
+    handleMouseMove,
+    animate,
+    particlesArray,
+  } = useParticleCanvasContext();
 
-  const [mousePosition, setMousePosition] = React.useState({
-    x: null,
-    y: null,
-  });
+  // React.useEffect(() => {
+  //   requestAnimationFrame(animate);
+  // }, []);
+
+  // console.log(particlesArray);
 
   React.useEffect(() => {
-    canvas = document.getElementById("canvas1");
-    ctx = canvas.current.getContext("2d");
-  });
+    animate();
+  }, [particlesArray]);
 
   React.useEffect(() => {
-    const updateMousePosition = (ev) => {
-      setMousePosition({ x: ev.clientX, y: ev.clientY });
-    };
+    const canvas = canvasRef.current;
+    ctx.current = canvas.getContext("2d");
+  }, [canvasRef]);
 
-    window.addEventListener("mousemove", updateMousePosition);
-
-    return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
-    };
-  }, []);
-
+  // animate();
   return (
     <div>
-      <canvas id="canvas1"></canvas>
+      <canvas
+        ref={canvasRef}
+        width={window.innerWidth}
+        height={window.innerHeight}
+        onClick={handleParticleBurst}
+        onMouseMove={handleParticleBurst}
+      ></canvas>
     </div>
   );
 };
 
 export default ParticleCanvas;
-
-// function drawCircle() {
-//   ctx.fillStyle = "red";
-//   ctx.beginPath();
-//   ctx.arc(100, 100, 50, 0, Math.PI * 2);
-//   ctx.fill();
-// }
-//
-// React.useEffect(() => {
-//   setCanvas(document.getElementById("canvas1"));
-//   setCtx(canvas.getContext("2d"));
-//   canvas.width = windowWidth;
-//   canvas.height = windowHeight;
-// });
-
-// React.useEffect(() => {
-//   const canvas = document.getElementById("canvas1");
-//   const ctx = canvas.getContext("2d");
-//   function watchResize() {
-//     setWindowWidth(window.innerWidth);
-//     setWindowHeight(window.innerHeight);
-//   }
-
-//   window.addEventListener("resize", watchResize);
-//   window.addEventListener("click", function (event) {
-//     setMouse({ x: event.x, y: event.y });
-//   });
-
-//   canvas.width = windowWidth;
-//   canvas.height = windowHeight;
-
-//   return function () {
-//     window.removeEventListener("resize", watchResize);
-//     window.removeEventListener("click", function (event) {
-//       setMouse({ x: event.x, y: event.y });
-//     });
-//   };
-// }, []);
