@@ -5,14 +5,15 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 // import { ParticleCanvasProvider } from "./context/ParticleCanvasContext";
-import { HeroCanvasProvider } from "./context/HeroCanvasContext";
+// import { HeroCanvasProvider } from "./context/HeroCanvasContext";
+import { HeroCanvasFFProvider } from "./context/HeroCanvasFFContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <HeroCanvasProvider>
+    <HeroCanvasFFProvider>
       <App />
-    </HeroCanvasProvider>
+    </HeroCanvasFFProvider>
   </React.StrictMode>
 );
 

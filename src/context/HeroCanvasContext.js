@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { ReactDOM } from "react";
+import React from "react";
 
 export const HeroCanvasContext = React.createContext();
 
@@ -8,7 +8,7 @@ export const HeroCanvasProvider = ({ children }) => {
   const canvasRef = React.useRef();
   const elementRef = React.useRef(HTMLHeadingElement || null);
   const ctx = React.useRef(null);
-  const particlesArray = React.useRef(new Array());
+  const particlesArray = React.useRef([]);
 
   const colorDot = [
     "rgb(81, 162, 233)",
@@ -22,6 +22,8 @@ export const HeroCanvasProvider = ({ children }) => {
     x: undefined,
     y: undefined,
   });
+
+  console.log(mousePosition);
 
   const dots = {
     distance: 200,
@@ -128,7 +130,7 @@ export const HeroCanvasProvider = ({ children }) => {
   }
 
   const initialize = () => {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 60; i++) {
       particlesArray.current.push(new Particle());
     }
 

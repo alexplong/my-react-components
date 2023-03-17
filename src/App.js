@@ -1,26 +1,27 @@
 /** @format */
-import Screen from "./components/Screen";
-import img1 from "./images/screen-1.jpg";
-import img2 from "./images/screen-2.jpg";
-import img3 from "./images/screen-3.jpg";
-import img4 from "./images/screen-4.jpg";
+// import Screen from "./components/Screen";
+// import img1 from "./images/screen-1.jpg";
+// import img2 from "./images/screen-2.jpg";
+// import img3 from "./images/screen-3.jpg";
+// import img4 from "./images/screen-4.jpg";
 // import img5 from "./images/screen-5.jpg";
 // import img6 from "./images/screen-6.jpg";
 
-import Blob from "./components/Blob";
-import "./blob.css";
+// import Blob from "./components/Blob";
+// import "./blob.css";
 
-import HackerText from "./components/HackerText";
-import "./hackertext.css";
+// import HackerText from "./components/HackerText";
+// import "./hackertext.css";
 
 // import ParticleCanvas from "./components/ParticleCanvas";
-import HeroCanvas from "./components/HeroCanvas";
+// import HeroCanvas from "./components/HeroCanvas";
+import HeroCanvasFF from "./components/HeroCanvasFF";
 import "./particlecanvas.css";
 
 function App() {
   return (
     <div className="app">
-      <HeroCanvas />
+      <HeroCanvasFF />
       {/* <HackerText textEffect="MY REACT COMPONENTS" /> */}
       <div className="container">
         {/* <ParticleCanvas /> */}
