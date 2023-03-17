@@ -3,11 +3,11 @@
 import React from "react";
 import { useHeroCanvasFFContext } from "../hooks/useHeroCanvasFFContext";
 
-const HeroCanvasFF = () => {
-  const { canvasRef, ctx, createParticle } = useHeroCanvasFFContext();
+const HeroCanvasFF = (props) => {
+  const { canvasRef, ctx, canvasParticles } = useHeroCanvasFFContext();
 
   React.useEffect(() => {
-    createParticle();
+    canvasParticles();
   }, []);
 
   React.useEffect(() => {
@@ -15,11 +15,12 @@ const HeroCanvasFF = () => {
     ctx.current = canvas.getContext("2d");
     ctx.current.lineWidth = 0.3;
     ctx.current.strokeColor = `rgb(81, 162, 233)`;
-  }, [canvasRef]);
+  }, [canvasRef, ctx]);
 
   return (
     <div>
       <canvas
+        {...props}
         ref={canvasRef}
         width={document.body.scrollWidth}
         height={window.innerHeight}
