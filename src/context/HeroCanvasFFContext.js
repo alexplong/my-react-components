@@ -51,13 +51,19 @@ export const HeroCanvasFFProvider = ({ children }) => {
       },
       animate: function () {
         for (let i = 1; i < Particles.current.NUMDOTS; i++) {
-          if (this.y < 0 || this.y > canvasRef.current.height) {
-            this.vY = -this.vY;
-          } else if (this.x < 0 || this.x > canvasRef.current.width) {
-            this.vX = -this.vX;
+          if (
+            Particles.current.array[i].y < 0 ||
+            Particles.current.array[i].y > canvasRef.current.height
+          ) {
+            Particles.current.array[i].vY = -Particles.current.array[i].vY;
+          } else if (
+            Particles.current.array[i].x < 0 ||
+            Particles.current.array[i].x > canvasRef.current.width
+          ) {
+            Particles.current.array[i].vX = -Particles.current.array[i].vX;
           }
-          this.x += this.vX;
-          this.y += this.vY;
+          Particles.current.array[i].x += Particles.current.array[i].vX;
+          Particles.current.array[i].y += Particles.current.array[i].vY;
         }
       },
       line: function () {
