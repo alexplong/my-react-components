@@ -1,11 +1,12 @@
 /** @format */
 
-import React from "react";
+import React, { ReactDOM } from "react";
 
 export const HeroCanvasContext = React.createContext();
 
 export const HeroCanvasProvider = ({ children }) => {
   const canvasRef = React.useRef();
+  const elementRef = React.useRef(HTMLHeadingElement || null);
   const ctx = React.useRef(null);
   const particlesArray = React.useRef(new Array());
 
@@ -47,7 +48,7 @@ export const HeroCanvasProvider = ({ children }) => {
       this.y += this.speedY;
     }
 
-    links() {
+    mouseLinks() {
       if (!ctx.current) return;
 
       for (let i = 0; i < particlesArray.current.length; i++) {
@@ -130,9 +131,9 @@ export const HeroCanvasProvider = ({ children }) => {
     for (let i = 0; i < 100; i++) {
       particlesArray.current.push(new Particle());
     }
-  };
 
-  initialize();
+    // handleInterval();
+  };
 
   const handleAura = (event) => {
     // console.log(event)
@@ -155,12 +156,12 @@ export const HeroCanvasProvider = ({ children }) => {
       particlesArray.current[i].update();
       particlesArray.current[i].draw();
     }
-    handleLinks();
+    handleMouseLinks();
   };
 
-  const handleLinks = () => {
+  const handleMouseLinks = () => {
     for (let i = 0; i < particlesArray.current.length; i++) {
-      particlesArray.current[i].links();
+      particlesArray.current[i].mouseLinks();
     }
   };
 
@@ -179,18 +180,27 @@ export const HeroCanvasProvider = ({ children }) => {
 
     handleParticles();
     // handleLinks();
-    requestAnimationFrame(animate);
+    requestAnimationFrame(animate); //comment off for interval
   };
+
+  // const handleInterval = () => {
+  //   setInterval(animate, 1000 / 30);
+  // };
 
   const handleResize = () => {
     particlesArray.current = [];
     initialize();
   };
 
+  console.log(elementRef);
+
+  initialize();
+
   return (
     <HeroCanvasContext.Provider
       value={{
         canvasRef,
+        elementRef,
         ctx,
         setMousePosition,
         animate,

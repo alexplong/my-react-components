@@ -5,6 +5,7 @@
 }
 canvas {
   position: absolute;
+  /* display: block; */
   background: green;
   /* background-color: black; */
   width: 100%;

@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import { useHeroCanvasContext } from "../hooks/useHeroCanvasContext";
 
 const HackerText = ({ textEffect }) => {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -24,15 +25,13 @@ const HackerText = ({ textEffect }) => {
     }, 30);
   };
   return (
-    <>
-      <h1
-        className="hacker--text"
-        data-value={textEffect}
-        onMouseOver={handleMouseOver}
-      >
-        {textEffect}
-      </h1>
-    </>
+    <h1
+      className="hacker--text"
+      data-value={textEffect}
+      onMouseOver={handleMouseOver}
+    >
+      {textEffect}
+    </h1>
   );
 };
 
