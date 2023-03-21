@@ -7,8 +7,21 @@ const HeroCanvasFF = (props) => {
   const { canvasRef, ctx, canvasParticles } = useHeroCanvasFFContext();
 
   React.useEffect(() => {
-    canvasParticles();
-  }, []);
+    let frameCount = 0;
+    let animationFrameId;
+
+    if (!ctx) return;
+    const render = () => {
+      frameCount++;
+      createParticles().createParticles();
+      animationFrameId = window.requestAnimationFrame(render);
+    };
+    render();
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
+  }, [ctx, canvasParticles]);
 
   React.useEffect(() => {
     const canvas = canvasRef.current;

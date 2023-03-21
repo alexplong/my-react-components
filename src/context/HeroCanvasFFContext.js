@@ -128,7 +128,7 @@ export const HeroCanvasFFProvider = ({ children }) => {
       },
     };
 
-    const createParticle = () => {
+    const createParticles = () => {
       if (!ctx.current || !canvasRef.current) return;
       ctx.current.fillStyle = "rgba(50, 50, 50, .01";
       ctx.current.fillRect(
@@ -149,7 +149,8 @@ export const HeroCanvasFFProvider = ({ children }) => {
       console.log("firing");
     };
 
-    setInterval(createParticle, 1000 / 30);
+    return createParticles;
+    // setInterval(createParticle, 1000 / 30);
   };
 
   return (

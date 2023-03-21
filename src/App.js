@@ -14,14 +14,17 @@
 // import "./hackertext.css";
 
 // import ParticleCanvas from "./components/ParticleCanvas";
-// import HeroCanvas from "./components/HeroCanvas";
-import HeroCanvasFF from "./components/HeroCanvasFF";
+import HeroCanvas from "./components/HeroCanvas";
+// import HeroCanvasFF from "./components/HeroCanvasFF";
 import "./particlecanvas.css";
+
+import KonvaParticleCanvas from "./components/KonvaParticleCanvas";
 
 function App() {
   return (
     <div className="app">
-      <HeroCanvasFF />
+      <HeroCanvas />
+      {/* <KonvaParticleCanvas /> */}
       {/* <HackerText textEffect="MY REACT COMPONENTS" /> */}
       <div className="container">
         {/* <ParticleCanvas /> */}

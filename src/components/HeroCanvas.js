@@ -7,23 +7,12 @@ const HeroCanvas = () => {
   const {
     canvasRef,
     ctx,
-    setMousePosition,
+    mousePosition,
     particlesArray,
     animate,
     handleAura,
     handleResize,
   } = useHeroCanvasContext();
-
-  // React.useEffect(() => {
-  //   const handleSetMouse = (event) => {
-  //     // console.log(event);
-  //     setMousePosition({ x: event.pageX, y: event.pageY });
-  //   };
-  //   window.addEventListener("mousemove", handleSetMouse);
-  //   return () => {
-  //     window.removeEventListener("mousemove", handleSetMouse);
-  //   };
-  // }, []);
 
   React.useEffect(() => {
     const setDimensions = () => {
@@ -45,8 +34,9 @@ const HeroCanvas = () => {
   }, []);
 
   React.useEffect(() => {
-    animate();
-  }, [particlesArray]);
+    // animate();
+    requestAnimationFrame(animate);
+  }, []);
 
   React.useEffect(() => {
     const canvas = canvasRef.current;
@@ -62,11 +52,9 @@ const HeroCanvas = () => {
         width={document.body.scrollWidth}
         height={window.innerHeight}
         onMouseMove={handleAura}
-      >
-        <div className="box">
-          <h1>HIT ME</h1>
-        </div>
-      </canvas>
+        on
+        // onMouseDown={handleAura}
+      ></canvas>
     </div>
   );
 };

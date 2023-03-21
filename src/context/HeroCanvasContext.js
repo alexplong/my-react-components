@@ -5,7 +5,7 @@ import React from "react";
 export const HeroCanvasContext = React.createContext();
 
 export const HeroCanvasProvider = ({ children }) => {
-  const canvasRef = React.useRef();
+  const canvasRef = React.useRef(HTMLCanvasElement);
   const elementRef = React.useRef(HTMLHeadingElement || null);
   const ctx = React.useRef(null);
   const particlesArray = React.useRef([]);
@@ -18,16 +18,14 @@ export const HeroCanvasProvider = ({ children }) => {
     "rgb(255, 77, 90)",
   ]; // 80% of dots are blue. 20% pink
 
-  const [mousePosition, setMousePosition] = React.useState({
+  const mousePosition = React.useRef({
     x: undefined,
     y: undefined,
   });
 
-  console.log(mousePosition);
-
   const dots = {
-    distance: 200,
-    d_radius: 550,
+    distance: 140,
+    d_radius: 350,
   };
 
   class Particle {
@@ -129,19 +127,23 @@ export const HeroCanvasProvider = ({ children }) => {
     }
   }
 
-  const initialize = () => {
-    for (let i = 0; i < 60; i++) {
+  initialize();
+
+  function initialize() {
+    for (let i = 0; i < 50; i++) {
       particlesArray.current.push(new Particle());
     }
-
-    // handleInterval();
-  };
+    particlesArray.current[0].size = 5;
+  }
 
   const handleAura = (event) => {
-    // console.log(event)
+    console.log(event.pageX, event.pageY);
     if (!event) return;
     let mouseX = event.pageX;
     let mouseY = event.pageY;
+
+    // let mouseX = mousePosition.x;
+    // let mouseY = mousePosition.y;
 
     try {
       particlesArray.current[0].x = mouseX;
@@ -151,14 +153,17 @@ export const HeroCanvasProvider = ({ children }) => {
     }
   };
 
-  const handleParticles = () => {
+  const handleParticles = async () => {
     // start at index 1
     // index 0 dot moves with mouse
+    particlesArray.current[0].draw();
+
     for (let i = 1; i < particlesArray.current.length; i++) {
       particlesArray.current[i].update();
       particlesArray.current[i].draw();
+      await particlesArray.current[i].mouseLinks();
     }
-    handleMouseLinks();
+    // handleMouseLinks();
   };
 
   const handleMouseLinks = () => {
@@ -171,7 +176,7 @@ export const HeroCanvasProvider = ({ children }) => {
     if (!ctx.current || !canvasRef.current) return;
 
     // ctx.current.fillStyle = "rgba(255, 255, 255, 0.1";
-    ctx.current.fillStyle = "rgba(0, 0, 0, 1";
+    ctx.current.fillStyle = "rgba(0, 0, 0, 1)";
 
     ctx.current.fillRect(
       0,
@@ -185,18 +190,10 @@ export const HeroCanvasProvider = ({ children }) => {
     requestAnimationFrame(animate); //comment off for interval
   };
 
-  // const handleInterval = () => {
-  //   setInterval(animate, 1000 / 30);
-  // };
-
   const handleResize = () => {
     particlesArray.current = [];
     initialize();
   };
-
-  console.log(elementRef);
-
-  initialize();
 
   return (
     <HeroCanvasContext.Provider
@@ -204,7 +201,7 @@ export const HeroCanvasProvider = ({ children }) => {
         canvasRef,
         elementRef,
         ctx,
-        setMousePosition,
+        mousePosition,
         animate,
         particlesArray,
         handleAura,
